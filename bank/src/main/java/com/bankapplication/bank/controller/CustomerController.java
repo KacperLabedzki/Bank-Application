@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/bankapi/")
 public class CustomerController {
     private CustomerService customerService;
-    private static final String ENDPOINT = "/customers";
+    private final String ENDPOINT = "/customers";
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
