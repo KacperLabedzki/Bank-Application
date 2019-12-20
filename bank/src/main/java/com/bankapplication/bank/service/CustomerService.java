@@ -2,6 +2,7 @@ package com.bankapplication.bank.service;
 
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.repository.CustomerRepository;
+import com.bankapplication.bank.validators.EmailValidator;
 import com.bankapplication.bank.validators.PeselValidator;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +18,27 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
-    public Customer getCustomer(long idCustomer){
+    public Customer getCustomer(long idCustomer) {
         return customerRepository.findById(idCustomer).get();
     }
 
-    public Customer addCustomer(Customer customer){
+    public Customer addCustomer(Customer customer) {
         PeselValidator peselValidator = new PeselValidator(customer.getPesel());
-        if(peselValidator.isValid()){
+        EmailValidator emailValidator = new EmailValidator(customer.getEmail());
+        if (peselValidator.isValid() && emailValidator.isValid()) {
             return customerRepository.save(customer);
-        }else {
+        } else {
             throw new IllegalArgumentException();
         }
     }
 
-    public Customer updateCustomer (Customer customer, long idCustomer){
+    public Customer updateCustomer(Customer customer, long idCustomer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(idCustomer);
-        if(optionalCustomer.isPresent()){
+        if (optionalCustomer.isPresent()) {
             optionalCustomer.get().setFirstName(customer.getFirstName());
             optionalCustomer.get().setLastName(customer.getLastName());
             optionalCustomer.get().setEmail(customer.getEmail());
@@ -45,9 +47,9 @@ public class CustomerService {
         }
         return null;
     }
-    public void deleteCustomer(long idCustomer){
+
+    public void deleteCustomer(long idCustomer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(idCustomer);
         customerRepository.delete(optionalCustomer.get());
     }
-
 }
