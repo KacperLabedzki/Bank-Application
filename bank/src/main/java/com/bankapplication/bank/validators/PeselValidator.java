@@ -1,31 +1,30 @@
 package com.bankapplication.bank.validators;
 
-public class PeselValidator implements Validator{
+public class PeselValidator implements Validator {
     private String pesel;
 
-    public PeselValidator(String pesel){
+    public PeselValidator(String pesel) {
         this.pesel = pesel;
     }
 
     @Override
     public boolean isValid() {
 
-        if(pesel.length()!=11){
+        if (pesel.length() != 11) {
             return false;
-        }else{
-            if(checkSum()){
+        } else {
+            if (checkSum()) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
     }
 
-    private boolean checkSum(){
-        byte [] tabPesel = new byte[11];
-        for(int i=0;i<11;i++){
-            tabPesel[i]=Byte.parseByte(pesel.substring(i,i+1));
+    private boolean checkSum() {
+        byte[] tabPesel = new byte[11];
+        for (int i = 0; i < 11; i++) {
+            tabPesel[i] = Byte.parseByte(pesel.substring(i, i + 1));
         }
         int sum = 1 * tabPesel[0] +
                 3 * tabPesel[1] +
@@ -40,9 +39,9 @@ public class PeselValidator implements Validator{
         sum %= 10;
         sum = 10 - sum;
         sum %= 10;
-        if(sum==tabPesel[10]){
+        if (sum == tabPesel[10]) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

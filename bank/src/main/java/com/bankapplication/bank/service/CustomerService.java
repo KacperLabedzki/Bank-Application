@@ -2,6 +2,7 @@ package com.bankapplication.bank.service;
 
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.repository.CustomerRepository;
+import com.bankapplication.bank.validators.PeselValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,12 @@ public class CustomerService {
     }
 
     public Customer addCustomer(Customer customer){
-        return customerRepository.save(customer);
+        PeselValidator peselValidator = new PeselValidator(customer.getPesel());
+        if(peselValidator.isValid()){
+            return customerRepository.save(customer);
+        }else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public Customer updateCustomer (Customer customer, long idCustomer){
