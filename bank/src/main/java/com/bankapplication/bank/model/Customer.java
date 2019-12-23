@@ -3,6 +3,7 @@ package com.bankapplication.bank.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -28,4 +29,14 @@ public class Customer {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
+    public Customer(Long id, String firstName, String lastName, String pesel, String email, String phoneNumber, Date dateOfBirth, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+    }
 }
