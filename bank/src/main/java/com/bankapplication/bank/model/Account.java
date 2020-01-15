@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Random;
 
 @Data
 @Entity
@@ -33,5 +34,23 @@ public class Account {
     }
 
     public Account() {
+        this.nrRef = nrRefGenerator();
+        this.nrb = accountNumberGenerator();
+        this.balance = new BigDecimal(0);
+    }
+
+    private String accountNumberGenerator(){
+        return numberGenerator(26);
+    }
+    private String nrRefGenerator(){
+        return "ROR-"+numberGenerator(5);
+    }
+    private String numberGenerator(int howLong){
+        StringBuilder stringBuilder = new StringBuilder();
+        Random random = new Random();
+        for(int i=0;i<howLong;i++){
+            stringBuilder.append(random.nextInt(10));
+        }
+        return stringBuilder.toString();
     }
 }
