@@ -1,6 +1,7 @@
 package com.bankapplication.bank.controller;
 
 import com.bankapplication.bank.model.Transfer;
+import com.bankapplication.bank.response.TransferStatusResponse;
 import com.bankapplication.bank.service.TransferService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,9 @@ public class TransferController {
     }
 
     @PostMapping(ENDPOINT)
-    public ResponseEntity<Transfer> sendTransfer(@RequestBody Transfer transfer) {
+    public ResponseEntity<TransferStatusResponse> sendTransfer(@RequestBody Transfer transfer) {
         try {
-            return new ResponseEntity<Transfer>(transferService.sendTransfer(transfer), HttpStatus.OK);
+            return new ResponseEntity<TransferStatusResponse>(transferService.sendTransfer(transfer), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
