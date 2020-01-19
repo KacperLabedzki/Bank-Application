@@ -1,5 +1,6 @@
 package com.bankapplication.bank.service;
 
+import com.bankapplication.bank.exceptinos.BadRequestException;
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.repository.CustomerRepository;
 import com.bankapplication.bank.validators.EmailValidator;
@@ -31,9 +32,8 @@ public class CustomerService {
         EmailValidator emailValidator = new EmailValidator(customer.getEmail());
         if (peselValidator.isValid() && emailValidator.isValid()) {
             return customerRepository.save(customer);
-        } else {
-            throw new IllegalArgumentException();
         }
+        return null;
     }
 
     public Customer updateCustomer(Customer customer, long idCustomer) {
