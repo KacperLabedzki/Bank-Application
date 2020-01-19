@@ -1,25 +1,25 @@
-package com.bankapplication.bank.exceptinos;
+package com.bankapplication.bank.response;
 
 import java.util.Date;
 
-public class ErrorMessage {
+public class ErrorMessageResponse {
     private String status;
     private int code;
     private Date timestamp;
     private String message;
 
-    public ErrorMessage(Date timestamp,String message, String status, int code) {
+    public ErrorMessageResponse(Date timestamp, String message, String status, int code) {
         this.timestamp = timestamp;
         this.message = message;
         this.status = status;
         this.code = code;
     }
 
-    public ErrorMessage(String message) {
+    public ErrorMessageResponse(String message) {
         this.message = message;
     }
 
-    public ErrorMessage() {
+    public ErrorMessageResponse() {
     }
 
     public String getMessage() {
