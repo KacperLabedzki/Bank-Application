@@ -1,5 +1,7 @@
 package com.bankapplication.bank.validators;
 
+import com.bankapplication.bank.exceptinos.BadRequestException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +20,10 @@ public class EmailValidator implements Validator {
     @Override
     public boolean isValid() {
         matcher = pattern.matcher(email);
-        return matcher.matches();
+        if(matcher.matches()){
+            return true;
+        }else {
+            throw new BadRequestException("Bledny email");
+        }
     }
 }

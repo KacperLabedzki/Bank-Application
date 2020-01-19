@@ -1,5 +1,7 @@
 package com.bankapplication.bank.validators;
 
+import com.bankapplication.bank.exceptinos.BadRequestException;
+
 public class PeselValidator implements Validator {
     private String pesel;
 
@@ -11,12 +13,12 @@ public class PeselValidator implements Validator {
     public boolean isValid() {
 
         if (pesel.length() != 11) {
-            return false;
+            throw new BadRequestException("Bledny pesel");
         } else {
             if (checkSum()) {
                 return true;
             } else {
-                return false;
+                throw new BadRequestException("Bledny pesel");
             }
         }
     }
