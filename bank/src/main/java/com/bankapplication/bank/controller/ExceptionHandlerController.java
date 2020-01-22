@@ -1,5 +1,7 @@
-package com.bankapplication.bank.exceptinos;
+package com.bankapplication.bank.controller;
 
+import com.bankapplication.bank.exceptinos.BadRequestException;
+import com.bankapplication.bank.exceptinos.InsufficientAccountBalanceException;
 import com.bankapplication.bank.model.StatusCode;
 import com.bankapplication.bank.response.ErrorMessageResponse;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.Date;
 
 @ControllerAdvice
-public class exceptionHandler extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     private final static String ERROR = "Error";
 
     @ExceptionHandler(value = {Exception.class})

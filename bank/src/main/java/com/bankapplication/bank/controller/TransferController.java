@@ -3,13 +3,10 @@ package com.bankapplication.bank.controller;
 import com.bankapplication.bank.model.Transfer;
 import com.bankapplication.bank.response.TransferStatusResponse;
 import com.bankapplication.bank.service.TransferService;
-import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -18,6 +15,7 @@ public class TransferController {
     private TransferService transferService;
     private final String ENDPOINT = "/transfer";
 
+    @Autowired
     public TransferController(TransferService transferService) {
         this.transferService = transferService;
     }

@@ -3,6 +3,7 @@ package com.bankapplication.bank.controller;
 import com.bankapplication.bank.model.Account;
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class AccountController {
     private AccountService accountService;
     private final String ENDPOINT = "/account";
 
+    @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }

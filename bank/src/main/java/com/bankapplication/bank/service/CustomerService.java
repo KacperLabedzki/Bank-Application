@@ -5,6 +5,7 @@ import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.repository.CustomerRepository;
 import com.bankapplication.bank.validators.EmailValidator;
 import com.bankapplication.bank.validators.PeselValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class CustomerService {
 
     private CustomerRepository customerRepository;
 
+    @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
@@ -45,11 +47,16 @@ public class CustomerService {
             optionalCustomer.get().setPhoneNumber(customer.getPhoneNumber());
             return customerRepository.save(optionalCustomer.get());
         }
-        return null;
+        throw new BadRequestException("Brak uzytkownika o takim id");
     }
 
     public void deleteCustomer(long idCustomer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(idCustomer);
-        customerRepository.delete(optionalCustomer.get());
+        if (optionalCustomer.isPresent()) {
+            customerRepository.delete(optionalCustomer.get());
+        } else {
+            throw new BadRequestException("Brak uzytkownika o takim id");
+        }
+
     }
 }

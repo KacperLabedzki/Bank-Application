@@ -2,6 +2,7 @@ package com.bankapplication.bank.controller;
 
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class CustomerController {
     private CustomerService customerService;
     private final String ENDPOINT = "/customers";
 
+    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }

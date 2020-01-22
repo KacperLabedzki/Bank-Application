@@ -1,9 +1,11 @@
 package com.bankapplication.bank.service;
 
+import com.bankapplication.bank.exceptinos.BadRequestException;
 import com.bankapplication.bank.model.Account;
 import com.bankapplication.bank.model.Customer;
 import com.bankapplication.bank.repository.AccountRepository;
 import com.bankapplication.bank.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,6 +16,7 @@ public class AccountService {
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
 
+    @Autowired
     public AccountService(AccountRepository accountRepository, CustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
         this.customerRepository = customerRepository;
@@ -33,9 +36,13 @@ public class AccountService {
 
     public Account addMoneyToAccount(long accountId, BigDecimal amount) {
         Optional<Account> optionalAccount = accountRepository.findById(accountId);
-        BigDecimal balance = optionalAccount.get().getBalance();
-        balance = balance.add(amount);
-        optionalAccount.get().setBalance(balance);
-        return accountRepository.save(optionalAccount.get());
+        if (optionalAccount.isPresent()) {
+            BigDecimal balance = optionalAccount.get().getBalance();
+            balance = balance.add(amount);
+            optionalAccount.get().setBalance(balance);
+            return accountRepository.save(optionalAccount.get());
+        } else {
+            throw new BadRequestException("Brak podanego konta");
+        }
     }
 }
