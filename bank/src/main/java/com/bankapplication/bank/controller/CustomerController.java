@@ -41,7 +41,7 @@ public class CustomerController {
 
     @PutMapping(ENDPOINT + "/{idCustomer}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable long idCustomer, @RequestBody Customer customer) {
-            return new ResponseEntity<Customer>(customerService.updateCustomer(customer, idCustomer), HttpStatus.OK);
+        return new ResponseEntity<Customer>(customerService.updateCustomer(customer, idCustomer), HttpStatus.OK);
     }
 
     @DeleteMapping(ENDPOINT + "/{idCustomer}")
@@ -49,7 +49,7 @@ public class CustomerController {
         try {
             customerService.deleteCustomer(idCustomer);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

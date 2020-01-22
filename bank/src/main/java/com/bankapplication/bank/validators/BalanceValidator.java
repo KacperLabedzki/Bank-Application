@@ -6,20 +6,20 @@ import com.bankapplication.bank.model.Transfer;
 
 import java.math.BigDecimal;
 
-public class BalanceValidator implements Validator{
+public class BalanceValidator implements Validator {
     private Account account;
     private BigDecimal amount;
 
-    public BalanceValidator(Account account,BigDecimal amount) {
+    public BalanceValidator(Account account, BigDecimal amount) {
         this.account = account;
         this.amount = amount;
     }
 
     @Override
     public boolean isValid() {
-        if(account.getBalance().compareTo(amount)>=0){
+        if (account.getBalance().compareTo(amount) >= 0) {
             return true;
-        }else{
+        } else {
             throw new InsufficientAccountBalanceException();
         }
     }

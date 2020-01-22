@@ -30,8 +30,9 @@ public class TransferController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping(ENDPOINT)
-    public ResponseEntity getAllTransfers(){
-        return new ResponseEntity(transferService.getAllTransfers(),HttpStatus.OK);
+    public ResponseEntity getAllTransfers() {
+        return new ResponseEntity(transferService.getAllTransfers(), HttpStatus.OK);
     }
 }

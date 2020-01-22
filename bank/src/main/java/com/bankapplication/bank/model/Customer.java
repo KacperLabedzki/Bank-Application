@@ -39,7 +39,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "accountOwner")
     @JsonManagedReference
-    @Fetch(value= FetchMode.SELECT)
+    @Fetch(value = FetchMode.SELECT)
     private Set<Account> accounts = new HashSet<>();
 
     public Customer(Long id, String firstName, String lastName, String pesel, String email, String phoneNumber, Date dateOfBirth, Address address) {

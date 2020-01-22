@@ -33,17 +33,17 @@ public class TransferService {
         BigDecimal accountToBalance = accountTo.get().getBalance();
         BalanceValidator balanceValidator = new BalanceValidator(accountFrom.get(), transfer.getAmount());
         if (balanceValidator.isValid()) {
-            try{
+            try {
                 statusCode = StatusCode.OK;
                 accountFrom.get().setBalance(accountFromBalance.subtract(transfer.getAmount()));
                 accountTo.get().setBalance(accountToBalance.add(transfer.getAmount()));
                 accountRepository.save(accountFrom.get());
                 accountRepository.save(accountTo.get());
                 transferRepository.save(transfer);
-                return new TransferStatusResponse(TransferStatus.SUCCESS,statusCode.getCode(),new Date());
-            }catch (Exception e){
+                return new TransferStatusResponse(TransferStatus.SUCCESS, statusCode.getCode(), new Date());
+            } catch (Exception e) {
                 statusCode = StatusCode.NOT_FOUND;
-                return new TransferStatusResponse(TransferStatus.UNSUCCESSFUL,statusCode.getCode(),new Date());
+                return new TransferStatusResponse(TransferStatus.UNSUCCESSFUL, statusCode.getCode(), new Date());
             }
         }
         return null;

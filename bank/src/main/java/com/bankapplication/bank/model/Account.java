@@ -25,7 +25,7 @@ public class Account {
     @JsonBackReference
     private Customer accountOwner;
 
-    public Account(long id, String nrRef, String nrb, BigDecimal balance,Customer accountOwner) {
+    public Account(long id, String nrRef, String nrb, BigDecimal balance, Customer accountOwner) {
         this.id = id;
         this.nrRef = nrRef;
         this.nrb = nrb;
@@ -39,16 +39,18 @@ public class Account {
         this.balance = new BigDecimal(0);
     }
 
-    private String accountNumberGenerator(){
+    private String accountNumberGenerator() {
         return numberGenerator(26);
     }
-    private String nrRefGenerator(){
-        return "ROR-"+numberGenerator(5);
+
+    private String nrRefGenerator() {
+        return "ROR-" + numberGenerator(5);
     }
-    private String numberGenerator(int howLong){
+
+    private String numberGenerator(int howLong) {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
-        for(int i=0;i<howLong;i++){
+        for (int i = 0; i < howLong; i++) {
             stringBuilder.append(random.nextInt(10));
         }
         return stringBuilder.toString();

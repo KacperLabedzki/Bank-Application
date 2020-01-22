@@ -20,9 +20,9 @@ public class EmailValidator implements Validator {
     @Override
     public boolean isValid() {
         matcher = pattern.matcher(email);
-        if(matcher.matches()){
+        if (matcher.matches()) {
             return true;
-        }else {
+        } else {
             throw new BadRequestException("Bledny email");
         }
     }
