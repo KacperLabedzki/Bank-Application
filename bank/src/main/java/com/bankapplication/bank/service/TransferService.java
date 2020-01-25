@@ -1,6 +1,7 @@
 package com.bankapplication.bank.service;
 
 import com.bankapplication.bank.exceptinos.BadRequestException;
+import com.bankapplication.bank.exceptinos.InsufficientAccountBalanceException;
 import com.bankapplication.bank.model.Account;
 import com.bankapplication.bank.model.StatusCode;
 import com.bankapplication.bank.model.Transfer;
@@ -44,16 +45,20 @@ public class TransferService {
                     accountRepository.save(accountFrom.get());
                     accountRepository.save(accountTo.get());
                     transferRepository.save(transfer);
+                    SendEmailService.sendEmail(transfer.getSenderEmail(),transfer,TransferStatus.SUCCESS,accountFrom.get(),accountTo.get());
                     return new TransferStatusResponse(TransferStatus.SUCCESS, statusCode.getCode(), new Date());
                 } catch (Exception e) {
                     statusCode = StatusCode.NOT_FOUND;
+                    SendEmailService.sendEmail(transfer.getSenderEmail());
                     return new TransferStatusResponse(TransferStatus.UNSUCCESSFUL, statusCode.getCode(), new Date());
                 }
+            } else {
+                SendEmailService.sendEmail(transfer.getSenderEmail());
+                throw new InsufficientAccountBalanceException();
             }
         } else {
-            throw new BadRequestException("Nieprawidlowe dane kont");
+            throw new BadRequestException("Invalid accounts details");
         }
-        return null;
     }
 
     public List<Transfer> getAllTransfers() {

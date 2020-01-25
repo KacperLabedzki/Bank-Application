@@ -14,6 +14,7 @@ public class Transfer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+    private String senderEmail;
     private String nrbFrom;
     private String nrbTo;
     private BigDecimal amount;

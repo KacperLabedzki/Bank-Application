@@ -1,8 +1,6 @@
 package com.bankapplication.bank.validators;
 
-import com.bankapplication.bank.exceptinos.InsufficientAccountBalanceException;
 import com.bankapplication.bank.model.Account;
-import com.bankapplication.bank.model.Transfer;
 
 import java.math.BigDecimal;
 
@@ -20,7 +18,7 @@ public class BalanceValidator implements Validator {
         if (account.getBalance().compareTo(amount) >= 0) {
             return true;
         } else {
-            throw new InsufficientAccountBalanceException();
+            return false;
         }
     }
 }

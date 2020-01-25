@@ -42,7 +42,7 @@ public class AccountService {
             optionalAccount.get().setBalance(balance);
             return accountRepository.save(optionalAccount.get());
         } else {
-            throw new BadRequestException("Brak podanego konta");
+            throw new BadRequestException("The account with this id does not exist");
         }
     }
 }

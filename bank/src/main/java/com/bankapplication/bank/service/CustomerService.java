@@ -47,7 +47,7 @@ public class CustomerService {
             optionalCustomer.get().setPhoneNumber(customer.getPhoneNumber());
             return customerRepository.save(optionalCustomer.get());
         }
-        throw new BadRequestException("Brak uzytkownika o takim id");
+        throw new BadRequestException("A client with this id does not exist");
     }
 
     public void deleteCustomer(long idCustomer) {
@@ -55,7 +55,7 @@ public class CustomerService {
         if (optionalCustomer.isPresent()) {
             customerRepository.delete(optionalCustomer.get());
         } else {
-            throw new BadRequestException("Brak uzytkownika o takim id");
+            throw new BadRequestException("A client with this id does not exist");
         }
 
     }
